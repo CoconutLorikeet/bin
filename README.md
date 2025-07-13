@@ -129,7 +129,7 @@ We welcome contributions\! Please see the CONTRIBUTING.md file for guidelines on
 
 ## **📄 License**
 
-This project is licensed under the MIT License \- see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE.md).
 
 ## **📧 Contact**
 

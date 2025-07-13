@@ -1,0 +1,50 @@
+# Define the stages in your pipeline.
+# 'build_and_test' is a common stage name for CI processes.
+stages:
+  - build_and_test
+
+# Define the 'shellcheck_job' job.
+shellcheck_job:
+  # Assign this job to the 'build_and_test' stage.
+  stage: build_and_test
+
+  # Specify the Docker image to use for this job.
+  # 'ubuntu:latest' provides a recent Ubuntu environment where apt-get is available.
+  image: ubuntu:latest
+
+  # Define the rules for when this job should run.
+  # This mimics the 'on: push' and 'on: pull_request' triggers from GitHub Actions.
+  rules:
+    # Rule 1: Run the job when there's a push to the 'main' branch.
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success # Only run if previous stages (if any) succeeded.
+    # Rule 2: Run the job when a merge request event occurs.
+    # This covers scenarios like opening a new MR or pushing new commits to an existing MR.
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: on_success # Only run if previous stages (if any) succeeded.
+
+  # Commands to execute before the main 'script' commands.
+  # This is typically used for setting up the environment or installing dependencies.
+  before_script:
+    - echo "Updating package lists and installing shellcheck..."
+    - apt-get update -y # Update the package lists
+    - apt-get install -y shellcheck # Install shellcheck
+
+  # The main commands to execute for this job.
+  script:
+    - echo "Running Shellcheck on all .sh scripts..."
+    # Find all files ending with .sh in the current directory and its subdirectories,
+    # then pass them to shellcheck using xargs.
+    # '-print0' and '-0' handle filenames with spaces or special characters safely.
+    # '-r' tells xargs not to run the command if no arguments are found.
+    - find . -type f -name "*.sh" -print0 | xargs -0 -r shellcheck
+    - echo "Shellcheck completed successfully."
+
+  # Optional: Define a cache for dependencies to speed up subsequent pipeline runs.
+  # For a simple 'apt-get install', it might not be strictly necessary,
+  # but for larger dependency sets, caching is highly beneficial.
+  cache:
+    paths:
+      - /var/cache/apt/archives/ # Cache apt packages
+    key: shellcheck-dependencies # A unique key for this cache
+    policy: pull-push # Pull cache before job, push after

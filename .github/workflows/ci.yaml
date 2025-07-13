@@ -1,0 +1,23 @@
+name: CI for bin scripts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run Shellcheck on scripts
+        run: |
+          find . -type f -name "*.sh" -print0 | xargs -0 -r shellcheck

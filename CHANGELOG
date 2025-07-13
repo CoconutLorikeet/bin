@@ -1,0 +1,25 @@
+---
+## CHANGELOG for CoconutLorikeet/bin
+
+This CHANGELOG aims to document all significant changes to the `CoconutLorikeet/bin` repository. The format is based on Keep a Changelog, and the project adheres to Semantic Versioning.
+
+---
+
+### Unreleased
+
+---
+
+### Version 1.0.0 - 2025-07-13
+
+---
+
+### Added
+
+* **Initial release of `CoconutLorikeet/bin` repository:**
+    * Includes a collection of personal utility scripts.
+    * Currently contains scripts for:
+        * `myscript.sh`: A placeholder for a frequently used personal script.
+        * `another_utility.py`: A Python script for a specific automation task.
+    * Basic README.md with repository description.
+
+---
