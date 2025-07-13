@@ -16,22 +16,22 @@ Before using these scripts, ensure you have the necessary tools installed:
 ### **Installation**
 
 1. **Clone the Repository**:
-   git clone https://github.com/your-username/bin.git \~/bin
+   git clone https://github.com/CoconutLorikeet/bin.git \~/bin
 
    *(Replace your-username with your actual GitHub username or the repository owner's username.)*
 2. Add to PATH (Recommended):
    To make these scripts callable from any directory, add the bin directory to your system's PATH environment variable.
    * **For Bash/Zsh users (add to \~/.bashrc or \~/.zshrc):**
-     echo 'export PATH="$HOME/bin:$PATH"' \>\> \~/.bashrc
+     echo 'export PATH="$HOME/bin/scripts:$PATH"' \>\> \~/.bashrc
      source \~/.bashrc \# Or source \~/.zshrc
 
    * **For Fish shell users (add to \~/.config/fish/config.fish):**
-     set \-gx PATH $HOME/bin $PATH
+     set \-gx PATH $HOME/bin/scripts $PATH
 
    * After adding to PATH, restart your terminal or source your shell's configuration file.
 3. Make Scripts Executable:
    Navigate into the cloned directory and make all scripts executable:
-   cd \~/bin
+   cd \~/bin/scripts
    chmod \+x \*.sh generate-ssh
 
 ## **📚 Script Reference & Examples**
@@ -42,7 +42,7 @@ Here's a detailed breakdown of each script with practical examples:
 
 Exports your GPG public and private keys to a specified file. This is crucial for backing up your keys or transferring them to a new machine.
 **Usage:**
-export-gpg.sh \<key\_id\> \<output\_file\_name\>
+export-gpg.sh
 
 Example:
 To export the GPG key with ID 0xYOURKEYID to a file named my\_gpg\_keys.asc in your home directory:
